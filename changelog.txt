@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.9.0
+Date: 2022-07-04
+  Features:
+    - Initial Release
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.1
+Date: 2022-07-04
+  Changes:
+    - Fixed confusing mod description.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.2
+Date: 2022-07-05
+  Features:
+    - Tweaked technology when using SE to be more inline with SE's techs.
+  Changes:
+    - Changed internal settings name to avoid naming collisions.
+    - Changed internal recipe and hidden tech name to be future-proof. This means all the mod settings and recipes set in the machines would be reset. Sorry guys, this certainly wouldn't happen again.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.3
+Date: 2022-07-05
+  Bugfixes:
+    - I have big stupid and forgot to check custom settings properly.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.4
+Date: 2022-07-05
+  Bugfixes:
+    - Now works with factorio 1.1.70.
+    - Fixed SE early unlock check being in reverse (Ticking it would unlock it later).
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.5
+Date: 2022-12-02
+  Bugfixes:
+    - Fixed missing check for recipe amount.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.9.6
+Date: 2024-05-03
+  Bugfixes:
+    - Fixed not multiplying recipe ingredients in some cases.
