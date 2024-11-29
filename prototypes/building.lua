@@ -1,0 +1,373 @@
+function furnacekpipepictures_a()
+  return {
+    north = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-N.png",
+      priority = "extra-high",
+      width = 35,
+      height = 18,
+      shift = util.by_pixel(2.5, 14),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-N.png",
+        priority = "extra-high",
+        width = 71,
+        height = 38,
+        shift = util.by_pixel(2.25, 13.5),
+        scale = 0.5,
+      },
+    },
+    east = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-E-top.png",
+      priority = "extra-high",
+      width = 30, --20,
+      height = 38,
+      shift = util.by_pixel(-29, 1),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-E-top.png",
+        priority = "extra-high",
+        width = 59, --42,
+        height = 76,
+        shift = util.by_pixel(-28.75, 1),
+        scale = 0.5,
+      },
+    },
+    south = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-S-right.png",
+      priority = "extra-high",
+      width = 44,
+      height = 31,
+      shift = util.by_pixel(0, -31.5),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-S-right.png",
+        priority = "extra-high",
+        width = 88,
+        height = 61,
+        shift = util.by_pixel(0, -31.5),
+        scale = 0.5,
+      },
+    },
+    west = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-W-bottom.png",
+      priority = "extra-high",
+      width = 19,
+      height = 37,
+      shift = util.by_pixel(25.5, 1.5),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-W-bottom.png",
+        priority = "extra-high",
+        width = 39,
+        height = 73,
+        shift = util.by_pixel(25.75, 1.25),
+        scale = 0.5,
+      },
+    },
+  }
+end
+
+function furnacekpipepictures_b()
+  return {
+    north = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-N.png",
+      priority = "extra-high",
+      width = 35,
+      height = 18,
+      shift = util.by_pixel(2.5, 14),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-N.png",
+        priority = "extra-high",
+        width = 71,
+        height = 38,
+        shift = util.by_pixel(2.25, 13.5),
+        scale = 0.5,
+      },
+    },
+    east = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-E-bottom.png",
+      priority = "extra-high",
+      width = 38, --20,
+      height = 38,
+      shift = util.by_pixel(-33, 1),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-E-bottom.png",
+        priority = "extra-high",
+        width = 76, --42,
+        height = 76,
+        shift = util.by_pixel(-33, 1),
+        scale = 0.5,
+      },
+    },
+    south = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-S-left.png",
+      priority = "extra-high",
+      width = 44,
+      height = 31,
+      shift = util.by_pixel(0, -31.5),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-S-left.png",
+        priority = "extra-high",
+        width = 88,
+        height = 61,
+        shift = util.by_pixel(0, -31.25),
+        scale = 0.5,
+      },
+    },
+    west = {
+      filename = kr_entities_path .. "advanced-furnace/advanced-furnace-k-pipe-W-top.png",
+      priority = "extra-high",
+      width = 19,
+      height = 42, --37,
+      shift = util.by_pixel(25.5, -2.25),
+      hr_version = {
+        filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-k-pipe-W-top.png",
+        priority = "extra-high",
+        width = 39,
+        height = 87, --73,
+        shift = util.by_pixel(25.5, -2.25),
+        scale = 0.5,
+      },
+    },
+  }
+end
+
+local hit_effects = require("__base__/prototypes/entity/hit-effects")
+local sounds = require("__base__/prototypes/entity/sounds")
+
+
+data:extend({
+  {
+    type = "assembling-machine",
+    name = "kr-advanced-furnace",
+    icon = kr_entities_icons_path .. "advanced-furnace.png",
+    icon_size = 128,
+    icon_mipmaps = 4,
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 1, result = "kr-advanced-furnace" },
+    max_health = 2000,
+    corpse = "kr-big-random-pipes-remnant",
+    dying_explosion = "big-explosion",
+    circuit_wire_max_distance = assembling_machine_circuit_wire_max_distance,
+    circuit_connector = circuit_connector_definitions["assembling-machine"],
+    resistances = {
+      { type = "physical", percent = 50 },
+      { type = "fire", percent = 95 },
+      { type = "impact", percent = 80 },
+    },
+    collision_box = { { -3.25, -3.25 }, { 3.25, 3.25 } },
+    selection_box = { { -3.5, -3.5 }, { 3.5, 3.5 } },
+    damaged_trigger_effect = hit_effects.entity(),
+    fluid_boxes = {
+      {
+        production_type = "input",
+        pipe_picture = furnacekpipepictures_a(),
+        pipe_covers = pipecoverspictures(),
+        volume = 1000,
+        pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 1, -3 } } },
+      },
+      {
+        production_type = "input",
+        pipe_picture = furnacekpipepictures_a(),
+        pipe_covers = pipecoverspictures(),
+        volume = 1000,
+        pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { -1, -3 } } },
+      },
+      {
+        production_type = "output",
+        pipe_picture = furnacekpipepictures_a(),
+        pipe_covers = pipecoverspictures(),
+        volume = 1000,
+        pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 1, 3 } } },
+      },
+      {
+        production_type = "output",
+        pipe_picture = furnacekpipepictures_a(),
+        pipe_covers = pipecoverspictures(),
+        volume = 1000,
+        pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { -1, 3 } } },
+      },
+    },
+    fluid_boxes_off_when_no_fluid_recipe = true,
+    graphics_set = {
+      animation = {
+        layers = {
+        {
+          filename = kr_entities_path .. "advanced-furnace/advanced-furnace.png",
+          priority = "high",
+          width = 240,
+          height = 240,
+          shift = { 0, -0.1 },
+          frame_count = 1,
+          hr_version = {
+            filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace.png",
+            priority = "high",
+            width = 480,
+            height = 480,
+            shift = { 0, -0.1 },
+            frame_count = 1,
+            scale = 0.5,
+          },
+        },
+        {
+          filename = kr_entities_path .. "advanced-furnace/advanced-furnace-sh.png",
+          priority = "high",
+          scale = scale,
+          width = 83,
+          height = 240,
+          shift = { 3.1, -0.1 },
+          frame_count = 1,
+          draw_as_shadow = true,
+          hr_version = {
+            filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-sh.png",
+            priority = "high",
+            width = 165,
+            height = 480,
+            shift = { 3.1, -0.1 },
+            frame_count = 1,
+            draw_as_shadow = true,
+            scale = 0.5,
+          },
+        },
+      },
+    },
+
+    working_visualisations =
+    {
+      -- {
+        -- constant_speed = true,
+        -- animation =
+        -- {
+          -- filename = kr_entities_path .. "advanced-furnace/advanced-furnace-anim-light.png",
+          -- priority = "high",
+          -- width = 240,
+          -- height = 240,
+          -- shift = { 0, -0.1 },
+          -- frame_count = 28,
+          -- line_length = 4,
+          -- animation_speed = 0.8,
+          -- draw_as_light = true,
+          -- hr_version = {
+            -- filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-anim-light.png",
+            -- priority = "high",
+            -- width = 480,
+            -- height = 480,
+            -- shift = { 0, -0.1 },
+            -- frame_count = 28,
+            -- line_length = 4,
+            -- animation_speed = 0.8,
+            -- draw_as_light = true,
+            -- scale = 0.5,
+          -- },
+        -- },
+      -- },
+      -- {
+        -- constant_speed = true,
+        -- animation = {
+          -- filename = kr_entities_path .. "advanced-furnace/advanced-furnace-anim-glow.png",
+          -- priority = "high",
+          -- width = 240,
+          -- height = 240,
+          -- shift = { 0, -0.1 },
+          -- frame_count = 28,
+          -- line_length = 4,
+          -- animation_speed = 0.8,
+          -- draw_as_glow = true,
+          -- fadeout = true,
+          -- blend_mode = "additive",
+          -- hr_version = {
+            -- filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-anim-glow.png",
+            -- priority = "high",
+            -- width = 480,
+            -- height = 480,
+            -- shift = { 0, -0.1 },
+            -- frame_count = 28,
+            -- line_length = 4,
+            -- animation_speed = 0.8,
+            -- draw_as_glow = true,
+            -- fadeout = true,
+            -- blend_mode = "additive",
+            -- scale = 0.5,
+          -- },
+        -- },
+      -- },
+      {
+        constant_speed = true,
+        fadeout = true,
+        effect = "flicker",
+        animation = {
+          filename = kr_entities_path .. "advanced-furnace/advanced-furnace-anim.png",
+          priority = "high",
+          width = 240,
+          height = 240,
+          shift = { 0, -0.1 },
+          frame_count = 28,
+          line_length = 4,
+          animation_speed = 0.8,
+          hr_version = {
+            filename = kr_entities_path .. "advanced-furnace/hr-advanced-furnace-anim.png",
+            priority = "high",
+            width = 480,
+            height = 480,
+            shift = { 0, -0.1 },
+            frame_count = 28,
+            line_length = 4,
+            animation_speed = 0.8,
+            scale = 0.5,
+          },
+        },
+      },
+      {
+        constant_speed = true,
+        light = {
+          intensity = 0.65,
+          size = 4,
+          shift = { 1.29, 2 },
+          color = { r = 1, g = 0.35, b = 0.2 },
+        },
+      },
+    },
+
+    water_reflection = {
+      pictures = {
+        filename = kr_entities_path .. "advanced-furnace/advanced-furnace-reflection.png",
+        priority = "extra-high",
+        width = 80,
+        height = 60,
+        shift = util.by_pixel(0, 40),
+        variation_count = 1,
+        scale = 5,
+      },
+      rotate = false,
+      orientation_to_variation = false,
+    },
+  },
+
+    crafting_categories = {
+    "smelting",
+    -- "metallurgy", "pressing", "crafting-with-fluid-or-metallurgy", "metallurgy-or-assembling",
+    "metallurgy"
+    },
+    crafting_speed = 12,
+    energy_source = {
+      type = "electric",
+      usage_priority = "secondary-input",
+      emissions_per_minute = { pollution = 12 }
+    },
+
+    energy_usage = "3.9MW",
+    heating_energy = "200kW",
+    module_slots = 4,
+    -- module_specification = { module_slots = 4, module_info_icon_shift = { 0, 1.7 }, module_info_icon_scale = 1 },
+    icons_positioning = { { inventory_index = defines.inventory.assembling_machine_modules, shift = {0, 1.7} } },
+    allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" },
+    open_sound = sounds.machine_open,
+    close_sound = sounds.machine_close,
+    impact_category = "metal",
+
+    working_sound =
+    {
+       sound = { filename = kr_buildings_sounds_path .. "advanced-furnace.ogg", volume = 1 },
+       audible_distance_modifier = 0.5,
+       max_sounds_per_type = 1,
+       fade_in_ticks = 4,
+       fade_out_ticks = 20,
+    },
+  },
+})
